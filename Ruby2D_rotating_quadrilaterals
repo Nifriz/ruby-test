@@ -1,0 +1,55 @@
+ require 'ruby2d'
+
+set background: 'white'
+set width: 640
+set height: 360
+set borderless: true
+
+
+
+player = Quad.new(
+  x1: 300, y1: 160,
+  x2: 340, y2: 160,
+  x3: 340, y3: 200,
+  x4: 300, y4: 200,
+  color: 'red',
+  z: 1
+)
+
+def rotate(quad)
+    rad = (Math::PI / 180) * -12
+    cos = Math.cos(rad)
+    sin = Math.sin(rad)
+
+    sx = 320
+    sy = 180
+
+    run = quad.x1 - sx
+    rise = quad.y1 - sy
+    quad.x1 = (cos * run) + (sin * rise) + sx
+    quad.y1 = (cos * rise) - (sin * run) + sy
+
+    run = quad.x2 - sx
+    rise = quad.y2 - sy
+    quad.x2 = (cos * run) + (sin * rise) + sx
+    quad.y2 = (cos * rise) - (sin * run) + sy
+
+    run = quad.x3 - sx
+    rise = quad.y3 - sy
+    quad.x3 = (cos * run) + (sin * rise) + sx 
+    quad.y3 = (cos * rise) - (sin * run) + sy
+
+    run = quad.x4 - sx
+    rise = quad.y4 - sy
+    quad.x4 = (cos * run) + (sin * rise) + sx 
+    quad.y4 = (cos * rise) - (sin * run) + sy
+end
+
+
+on :key_held do |event|
+  if event.key == 'd' # 1° Degree Anticlockwise Rotation
+    rotate(player)
+  end 
+end
+
+show
